@@ -6,10 +6,19 @@
     <description>Recent content in Posts on CJW的博客小栈</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 29 Feb 2020 19:11:38 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2020 11:08:02 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>关于jQuery中的API实现</title>
+      <link>http://localhost:1313/post/%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84api%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Wed, 11 Mar 2020 11:08:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84api%E5%AE%9E%E7%8E%B0/</guid>
+      <description>关于jQuery中API的实现 例题： window.jQuery = ??? window.$ = jQuery var $div = $(&#39;div&#39;) $div.addClass(&#39;red&#39;) // 可将所有 div 的 class 添加一个 red $div.setText(&#39;hi&#39;) // 可将所有 div 的 textContent 变为 hi 补全上面的？？？ 答案： window.jQuery = function(nodeOrSelector) { let</description>
+    </item>
     
     <item>
       <title>记录如何上传新的文章博客</title>

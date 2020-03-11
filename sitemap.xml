@@ -10,7 +10,14 @@
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-02-29T19:11:38+08:00</lastmod>
+    <lastmod>2020-03-11T11:08:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84api%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2020-03-11T11:08:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
