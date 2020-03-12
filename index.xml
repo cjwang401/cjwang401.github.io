@@ -32,6 +32,65 @@
     </item>
     
     <item>
+      <title>jquery中的$(</title>
+      <link>http://localhost:1313/post/jquery%E4%B8%AD%E7%9A%84#id%E4%B8%8Edocument.getelementbyidid%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Thu, 12 Mar 2020 11:18:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/jquery%E4%B8%AD%E7%9A%84#id%E4%B8%8Edocument.getelementbyidid%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      
+        <description>&lt;p&gt;以前一直认为jquery中的$(&amp;quot;#id&amp;rdquo;)和document.getElementByIdx_x(&amp;ldquo;id&amp;rdquo;)得到的效果是一样的，今天做特效的时候才发现并不是这么一回事，通过测试得到:
+1、alert($(&amp;quot;#div&amp;rdquo;))得到的是[object Object]&lt;/p&gt;
+&lt;p&gt;2、alert(document.getElementById(&amp;ldquo;div&amp;rdquo;))得到的是[object HTMLDivElement]&lt;/p&gt;
+&lt;p&gt;3、alert($(&amp;quot;#div&amp;rdquo;)[0])或者alert($(&amp;quot;#div&amp;rdquo;).get(0))得到的是[object HTMLDivElement]&lt;/p&gt;
+&lt;p&gt;##原因解读：
+&lt;strong&gt;document.getElementById()返回的是DOM对象，而$()返回的是jQuery对象&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;##什么是jQuery对象？
+&lt;strong&gt;答：通过jQuery包装DOM对象后产生的对象。jQuery对象是jQuery独有的，其可以使用jQuery里的方法.&lt;/strong&gt;
+例如：$(&amp;quot;#test&amp;rdquo;).html() 意思是指：获取ID为test的元素内的html代码。其中html()是jQuery里的方法这段代码等同于用DOM实现代码： document.getElementById(&amp;ldquo;id&amp;rdquo;).innerHTML; 虽然jQuery对象是包装DOM对象后产生的，但是jQuery无法使用DOM对象的任何方法，同理DOM对象也不能使用jQuery里的方法.乱使用会 报错。比如：$(&amp;quot;#test&amp;rdquo;).innerHTML、document.getElementById(&amp;ldquo;id&amp;rdquo;).()之类的写法都是错误的。
+&lt;strong&gt;还有一个要注意的是&lt;/strong&gt;：用#id作为选择符取得的是jQuery对象与document.getElementById(&amp;ldquo;id&amp;rdquo;)得到的DOM对象，这两者并不等价。请参看如下说的两者间的转换。 既然jQuery有区别但也有联系，那么jQuery对象与DOM对象也可以相互转换。在两者转换前首先我们给一个约定：如果一个获取的是jQuery对 象，那么我们在变量前面加上$，如：var $variab = jQuery对象；如果获取的是DOM对象，则与习惯普通一样：var variab = DOM对象；这么约定只是便于讲解与区别，实际使用中并不规定。&lt;/p&gt;
+&lt;p&gt;jQuery对象转成DOM对象：
+两种转换方式将一个jQuery对象转换成DOM对象：[index]和.get(index);
+(1)jQuery对象是一个数据对象，可以通过[index]的方法，来得到相应的DOM对象。
+如：var $v =$(&amp;quot;#v&amp;rdquo;) ; //jQuery对象
+var v=$v[0]; //DOM对象
+alert(v.checked) //检测这个checkbox是否被选中
+(2)jQuery本身提供，通过.get(index)方法，得到相应的DOM对象
+如：var $v=$(&amp;quot;#v&amp;rdquo;); //jQuery对象
+var v=$v.get(0); //DOM对象
+alert(v.checked) //检测这个checkbox是否被选中&lt;/p&gt;
+&lt;p&gt;DOM对象转成jQuery对象:
+对于已经是一个DOM对象，只需要用$()把DOM对象包装起来，就可以获得一个jQuery对象了。$(DOM对象)
+如：var v=document.getElementById(&amp;ldquo;v&amp;rdquo;); //DOM对象
+var $v=$(v); //jQuery对象
+转换后，就可以任意使用jQuery的方法了。
+通过以上方法，可以任意的相互转换jQuery对象和DOM对象。需要再强调注意的是：DOM对象才能使用DOM中的方法，jQuery对象是不可以用DOM中的方法。&lt;/p&gt;
+&lt;p&gt;下面是其它的相关使用方法：
+&lt;strong&gt;1、DOM对象转jQuery对象&lt;/strong&gt;
+普通的Dom对象一般可以通过$()转换成jQuery对象。&lt;/p&gt;
+&lt;p&gt;如：$(document.getElementById(&amp;ldquo;msg&amp;rdquo;))
+返回的就是jQuery对象，可以使用jQuery的方法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2、jQuery对象转DOM对象&lt;/strong&gt;
+由于jQuery对象本身是一个集合。所以如果jQuery对象要转换为Dom对象则必须取出其中的某一项，一般可通过索引取出。
+如： $(&amp;quot;#msg&amp;rdquo;)[0]，$(&amp;ldquo;div&amp;rdquo;).eq(1)[0]，$(&amp;ldquo;div&amp;rdquo;).get()[1]，$(&amp;ldquo;td&amp;rdquo;)[5]&lt;/p&gt;
+&lt;p&gt;这些都是Dom对象，可以使用Dom中的方法，但不能再使用jQuery的方法。&lt;/p&gt;
+&lt;p&gt;以下几种写法都是正确的：
+$(&amp;quot;#msg&amp;rdquo;).();
+$(&amp;quot;#msg&amp;rdquo;)[0].innerHTML;
+$(&amp;quot;#msg&amp;rdquo;).eq(0)[0].innerHTML;
+$(&amp;quot;#msg&amp;rdquo;).get(0).innerHTML;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3、两种方法获取对象方式： 如有 &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过id:&lt;/p&gt;
+&lt;p&gt;　　document.getElementById(&amp;lsquo;formid&amp;rsquo;);&lt;/p&gt;
+&lt;p&gt;　　$(&#39;#formid&amp;rsquo;)&lt;/p&gt;
+&lt;p&gt;通过name&lt;/p&gt;
+&lt;p&gt;　　document.getElementsByName(&amp;lsquo;formName&amp;rsquo;)[0]&lt;/p&gt;
+&lt;p&gt;　　$(&amp;ldquo;form[name=&#39;formName&amp;rsquo;]&amp;quot;)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images2015.cnblogs.com/blog/908704/201606/908704-20160617102623729-1752850593.png&#34; alt=&#34; jquery固有的方法：&#34;&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>关于jQuery中的API实现</title>
       <link>http://localhost:1313/post/%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84api%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Wed, 11 Mar 2020 11:08:02 +0800</pubDate>
